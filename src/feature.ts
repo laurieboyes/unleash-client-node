@@ -6,3 +6,8 @@ export interface FeatureInterface {
     enabled: boolean;
     strategies: StrategyTransportInterface[];
 }
+
+export interface FeatureInContextInterface {
+    name: string;
+    enabled: boolean;
+}

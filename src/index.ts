@@ -1,4 +1,5 @@
 import { Unleash, UnleashConfig } from './unleash';
+import { FeatureInContextInterface } from './feature';
 
 export { Strategy } from './strategy/index';
 export { Unleash } from './unleash';
@@ -12,6 +13,16 @@ export function initialize(options: UnleashConfig): Unleash {
 
 export function isEnabled(name: string, context: any, fallbackValue?: boolean): boolean {
     return instance && instance.isEnabled(name, context, fallbackValue);
+}
+
+export function getFeaturesEnabled(context: any): FeatureInContextInterface {
+    return (
+        instance &&
+        instance.getToggles().map(toggle => ({
+            name: toggle.name,
+            enabled: isEnabled(toggle.name, context),
+        }))
+    );
 }
 
 export function destroy() {
